@@ -1,0 +1,20 @@
+{
+  "author": "Todd Larsen <tlarsen@groupon.com>",
+  "name": "churnal",
+  "description": "Email a weekly diff journal of arbitrary directories in a repo",
+  "version": "0.0.0",
+  "repository": {
+    "url": ""
+  },
+  "dependencies": {
+    "nodemailer":""
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "start": "./email-auth.sh coffee driver.coffee"
+  }
+}
