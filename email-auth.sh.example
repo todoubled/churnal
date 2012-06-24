@@ -1,3 +1,0 @@
-export GMAIL_USER="email@gmail.com"
-export GMAIL_PASSWORD="password"
-exec "$@"

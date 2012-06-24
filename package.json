@@ -13,8 +13,5 @@
   "optionalDependencies": {},
   "engines": {
     "node": "*"
-  },
-  "scripts": {
-    "start": "./email-auth.sh coffee driver.coffee"
   }
 }

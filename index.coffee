@@ -1,5 +1,5 @@
-GitLogger = require('./gitlogger')
-Emailer = require('./emailer')
+GitLogger = require('./lib/gitlogger')
+Emailer = require('./lib/emailer')
 exec = require('child_process').exec
 fs = require('fs')
 
