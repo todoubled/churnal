@@ -1,5 +1,5 @@
 util = require('util')
-exec = require('child_process').exec
+spawn = require('child_process').spawn
 
 class GitLogger
   constructor: (@options, @callback) ->
@@ -29,14 +29,9 @@ class GitLogger
         git --no-pager show SHAs -- #{dirs}
     "
 
-
-  puts: (error, stdout, stderr) =>
-    if error then throw error
-    @callback(stdout)
-
-
-  execute: (pipeline) ->
-    exec(pipeline, @puts)
+  execute: (pipeline) =>
+    sh = spawn(pipeline)
+    sh.on 'exit', @callback
 
 
 module.exports = GitLogger
