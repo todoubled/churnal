@@ -6,7 +6,7 @@ options =
     to:
       firstName: 'Todd'
       lastName: 'Larsen'
-      email: 'tlarsen@groupon.com'
+      email: 'email@address.com'
     from:
       name: 'Git Log'
       service: 'Gmail'

@@ -26,9 +26,7 @@ options =
     subject: "Changes in the last week"
 
 
-callback = (err, result) ->
+churnal options, (err, result) ->
   if err then throw err
   process.exit()
-
-new Churnal(options, callback)
 ```
