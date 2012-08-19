@@ -1,29 +1,17 @@
-GitLogger = require('./lib/gitlogger')
-Emailer = require('./lib/emailer')
-exec = require('child_process').exec
-fs = require('fs')
+cp = require 'child_process'
+fs = require 'fs'
+Emailer = require './lib/emailer'
 
+sendEmail = (options, callback) -> new Emailer(options.email, callback)
 
-class Churnal
-  constructor: (@options, @callback) ->
-    @gitLog()
+module.exports = logStream = (options, callback) ->
+  child = cp.spawn 'sh', ['-c', options.script]
+  outputFilepath = "/tmp/#{new Date().toDateString().replace(/\s/g, '_')}.diff"
+  stream = fs.createWriteStream outputFilepath
 
-
-  gitLog: ->
-    new GitLogger(@options.git, @writeFile)
-
-
-  sendEmail: (filePath) =>
-    @options.email.attachments = [ filePath: filePath ]
-    new Emailer(@options.email, @callback)
-
-
-  writeFile: (diff) =>
-    filePath = "/tmp/#{new Date().toDateString().replace(/\s/g, '_')}.diff"
-    fs.writeFile filePath, diff, (err) =>
-      if err then throw err
-      else @sendEmail(filePath)
-
-
-
-module.exports = Churnal
+  child.stdout.pipe stream
+  #child.stdout.pipe process.stderr
+  child.on 'exit', (err, close) =>
+    if err then throw err
+    options.email.attachments = [ filePath: outputFilepath ]
+    sendEmail options, callback

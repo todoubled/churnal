@@ -2,16 +2,16 @@
   "author": "Todd Larsen <tlarsen@groupon.com>",
   "name": "churnal",
   "description": "Email a weekly diff journal of arbitrary directories in a repo",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "repository": {
     "url": ""
   },
   "dependencies": {
-    "nodemailer":""
+    "nodemailer": ""
   },
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
-    "node": "*"
+    "node": "0.6.4"
   }
 }
