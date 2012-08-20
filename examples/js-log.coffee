@@ -4,9 +4,9 @@ options =
   script: "#{__dirname}/scripts/js-what-changed.sh"
   email:
     to:
-      firstName: 'Todd'
-      lastName: 'Larsen'
-      email: 'email@address.com'
+      firstName: 'Front End'
+      lastName: 'Team'
+      email: process.env.TO_EMAIL
     from:
       name: 'Git Log'
       service: 'Gmail'

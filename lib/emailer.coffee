@@ -1,32 +1,23 @@
 emailer = require 'nodemailer'
 
-class Emailer
-  constructor: (@email, @callback) ->
-    @send()
+getTransport = (options) ->
+  emailer.createTransport 'SMTP',
+    service: options.from.service
+    auth:
+      user: options.from.auth.user
+      pass: options.from.auth.pass
 
+module.exports = email = (options, callback) ->
+  transport = getTransport options
+  data =
+    to: "'#{options.to.firstName} #{options.to.lastName}' <#{options.to.email}>"
+    from: options.from.name
+    subject: options.subject
+    html: options.message
+    attachments: options.attachments
 
-  send: ->
-    transport = @getTransport()
-    data =
-      to: "'#{@email.to.firstName} #{@email.to.lastName}' <#{@email.to.email}>"
-      from: @email.from.name
-      subject: @email.subject
-      html: @email.message
-      attachments: @email.attachments
+  cb = (err, result) ->
+    transport.close()
+    callback err, result
 
-    callback = (err, result) =>
-      transport.close()
-      @callback(err, result)
-
-    transport.sendMail data, callback
-
-
-  getTransport: ->
-    emailer.createTransport 'SMTP',
-      service: @email.from.service
-      auth:
-        user: @email.from.auth.user
-        pass: @email.from.auth.pass
-
-
-module.exports = Emailer
+  transport.sendMail data, cb
