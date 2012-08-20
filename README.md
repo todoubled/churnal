@@ -7,7 +7,7 @@ Email yourself a diff journal of the churn on specific file paths in your codeba
 Give churnal a git script and some options (see ```examples/```) and it will email you the stdout.
 
 ```
-Churnal = require './churnal/index'
+churnal = require './churnal'
 
 options =
   script: "#{__dirname}/js-digest.sh"
